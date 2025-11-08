@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Job - Find Your Dream Career</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Define Inter font and system defaults */
+        :root {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for the hero background */
+        .hero-background {
+            /* Using a simple gradient placeholder for the requested background image */
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.9) 0%, rgba(17, 24, 39, 0.9) 100%), url('https://placehold.co/1920x600/1E40AF/ffffff?text=Professional+Background');
+            background-size: cover;
+            background-position: center;
+        }
+        /* Style for circular company logos */
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            overflow: hidden; /* Ensure content stays within the circle */
+        }
+        /* Utility to hide/show pages */
+        .page-content {
+            display: none;
+        }
+        /* Utility for dropdown hover effect on desktop */
+        @media (min-width: 768px) {
+            /* Main dropdown on hover */
+            .group:hover .group-hover\:block {
+                display: block !important;
+            }
+            /* Nested dropdown on hover */
+            .group\/sub:hover .group-hover\/sub\:block {
+                display: block !important;
+            }
+        }
+        /* Custom scrollbar style */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" onclick="navigate('home')" class="text-2xl font-extrabold text-blue-700 hover:text-blue-900 transition duration-150">
+                        Help Job
+                    </a>
+                </div>
+
+                <!-- Desktop Menu Items -->
+                <div class="hidden md:flex md:items-center md:space-x-4">
+                    <a href="#" onclick="navigate('home')" class="nav-link text-gray-600 hover:text-blue-700 font-medium px-3 py-2 rounded-md transition duration-150">Home</a>
+                    
+                    <!-- Job Notifications Dropdown (Restructured) -->
+                    <div class="relative group">
+                        <button class="flex items-center text-gray-600 hover:text-blue-700 font-medium px-3 py-2 rounded-md transition duration-150 focus:outline-none" onclick="toggleDropdown('jobs-dropdown')">
+                            Job Notifications
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform duration-200"></i>
+                        </button>
+                        
+                        <!-- Dropdown Content (Desktop) -->
+                        <div id="jobs-dropdown" class="group-hover:block absolute hidden z-10 mt-2 w-56 rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-5 origin-top-right transition-all duration-300 transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100">
+                            <div class="py-1">
+                                <!-- Private Jobs (Nested Sub-Menu) -->
+                                <div class="relative group/sub">
+                                    <a href="#" onclick="navigate('jobs', 'Private')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex justify-between items-center">
+                                        Private Jobs
+                                        <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                                    </a>
+                                    
+                                    <!-- Sub-Dropdown for IT/Non-IT -->
+                                    <div class="absolute left-full top-0 ml-1 hidden w-48 rounded-lg shadow-xl bg-gray-50 ring-1 ring-black ring-opacity-5 group-hover/sub:block">
+                                        <div class="py-1">
+                                            <a href="#" onclick="navigate('jobs', 'IT')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">IT Jobs</a>
+                                            <a href="#" onclick="navigate('jobs', 'Non-IT')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Non-IT Jobs</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Other Top-Level Jobs -->
+                                <a href="#" onclick="navigate('jobs', 'Internships')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Internships</a>
+                                <a href="#" onclick="navigate('jobs', 'Govt')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Govt Jobs</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" onclick="navigate('certifications')" class="nav-link text-gray-600 hover:text-blue-700 font-medium px-3 py-2 rounded-md transition duration-150">Free Certifications</a>
+                    <a href="#" onclick="navigate('blog')" class="nav-link text-gray-600 hover:text-blue-700 font-medium px-3 py-2 rounded-md transition duration-150">Blog</a>
+                    <a href="#" onclick="navigate('about')" class="nav-link text-gray-600 hover:text-blue-700 font-medium px-3 py-2 rounded-md transition duration-150">About</a>
+                    <a href="#" onclick="navigate('contact')" class="nav-link text-gray-600 hover:text-blue-700 font-medium px-3 py-2 rounded-md transition duration-150">Contact Form</a>
+                </div>
+
+                <!-- Notification Bell & Mobile Menu Button -->
+                <div class="flex items-center">
+                    <button class="p-2 rounded-full text-gray-400 hover:text-blue-700 hover:bg-gray-100 focus:outline-none mr-3 transition duration-150" aria-label="Notifications">
+                        <i data-lucide="bell" class="w-6 h-6"></i>
+                    </button>
+                    <!-- Mobile menu button - Icon Toggle Logic -->
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-blue-700 hover:bg-gray-100 focus:outline-none md:hidden" aria-controls="mobile-menu" aria-expanded="false">
+                        <i data-lucide="menu" id="menu-icon" class="w-6 h-6 block"></i>
+                        <i data-lucide="x" id="close-icon" class="hidden w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" onclick="navigate('home')" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700">Home</a>
+                
+                <!-- Mobile Dropdown Toggle (Job Notifications) -->
+                <button class="w-full text-left flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700" onclick="toggleDropdown('mobile-jobs-dropdown')">
+                    Job Notifications
+                    <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition-transform duration-200"></i>
+                </button>
+                <!-- Mobile Dropdown Content -->
+                <div id="mobile-jobs-dropdown" class="pl-6 pt-1 hidden space-y-1">
+                    
+                    <!-- Private Jobs (Mobile Nested Sub-Dropdown) -->
+                    <button class="w-full text-left flex justify-between items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600 rounded-md" onclick="toggleDropdown('mobile-private-sub-dropdown')">
+                        Private Jobs
+                        <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                    </button>
+                    <div id="mobile-private-sub-dropdown" class="pl-4 pt-1 hidden space-y-1">
+                        <a href="#" onclick="navigate('jobs', 'IT')" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600 rounded-md">IT Jobs</a>
+                        <a href="#" onclick="navigate('jobs', 'Non-IT')" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600 rounded-md">Non-IT Jobs</a>
+                    </div>
+
+                    <a href="#" onclick="navigate('jobs', 'Internships')" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600 rounded-md">Internships</a>
+                    <a href="#" onclick="navigate('jobs', 'Govt')" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-blue-600 rounded-md">Govt Jobs</a>
+                </div>
+                
+                <a href="#" onclick="navigate('certifications')" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700">Free Certifications</a>
+                <a href="#" onclick="navigate('blog')" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700">Blog</a>
+                <a href="#" onclick="navigate('about')" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700">About</a>
+                <a href="#" onclick="navigate('contact')" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700">Contact Form</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        
+        <!-- HOME PAGE CONTENT -->
+        <section id="home-page" class="page-content">
+            <!-- Hero Section with Background Image and Search Bar -->
+            <div class="hero-background text-white py-24 sm:py-32 rounded-b-xl shadow-xl">
+                <div class="max-w-4xl mx-auto text-center px-4">
+                    <h1 class="text-5xl sm:text-6xl font-extrabold mb-4 leading-tight">
+                        Find Your Dream Job Today
+                    </h1>
+                    <p class="text-xl sm:text-2xl font-light mb-8">
+                        The ultimate platform to connect with IT, Non-IT, Govt, and Private opportunities.
+                    </p>
+                    <!-- Search Bar -->
+                    <form onsubmit="return false;" class="bg-white p-2 rounded-lg shadow-2xl flex flex-col sm:flex-row gap-2">
+                        <input type="text" placeholder="Search by Job Title, Skill, or Company..."
+                               class="flex-grow p-3 rounded-md text-gray-800 border-none focus:ring-2 focus:ring-blue-500 transition duration-150"
+                               aria-label="Job Search Input">
+                        <input type="text" placeholder="Location (e.g., Remote, Hyderabad)"
+                               class="flex-grow p-3 rounded-md text-gray-800 border-none focus:ring-2 focus:ring-blue-500 transition duration-150 sm:max-w-xs"
+                               aria-label="Location Input">
+                        <button type="submit"
+                                class="bg-blue-600 text-white font-bold py-3 px-6 rounded-md hover:bg-blue-700 transition duration-200 shadow-md flex items-center justify-center">
+                            <i data-lucide="search" class="w-5 h-5 mr-2"></i>
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Featured Job Cards Section -->
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Latest Job Notifications</h2>
+                <div id="job-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Job Cards will be injected here by JS on initial load -->
+                </div>
+                <div class="text-center mt-10">
+                    <button onclick="navigate('jobs')" class="bg-gray-200 text-gray-800 font-semibold py-3 px-8 rounded-full hover:bg-gray-300 transition duration-200 shadow-lg">
+                        View All Opportunities
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOB NOTIFICATIONS PAGE CONTENT -->
+        <section id="jobs-page" class="page-content max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <h1 id="jobs-title" class="text-4xl font-extrabold text-gray-900 mb-6 border-b pb-4">All Job Opportunities</h1>
+            <p class="text-lg text-gray-600 mb-8">Showing jobs filtered by **All**. Use the navigation menu to select a specific category.</p>
+            <div id="full-job-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Full list of job cards goes here -->
+            </div>
+        </section>
+
+        <!-- FREE CERTIFICATIONS PAGE CONTENT -->
+        <section id="certifications-page" class="page-content max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold text-green-600 mb-6 border-b pb-4">Free Certifications & Courses</h1>
+            <p class="text-lg text-gray-600 mb-8">Boost your profile! Here is a curated list of free courses and certifications to enhance your skills.</p>
+            <div class="space-y-6">
+                <div class="p-6 bg-white rounded-xl shadow-md transition duration-300 hover:shadow-lg">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-2">Introduction to Cloud Computing (AWS/Azure)</h3>
+                    <p class="text-gray-700">A beginner-friendly course covering the basics of cloud infrastructure. Includes a free certificate of completion.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 mt-2 inline-block font-medium flex items-center">
+                        Enroll Now <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="p-6 bg-white rounded-xl shadow-md transition duration-300 hover:shadow-lg">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-2">Data Analytics Fundamentals (Google)</h3>
+                    <p class="text-gray-700">Learn essential data analysis tools and techniques using popular platforms. Perfect for career switching.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 mt-2 inline-block font-medium flex items-center">
+                        Enroll Now <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+                <div class="p-6 bg-white rounded-xl shadow-md transition duration-300 hover:shadow-lg">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-2">Government Exam Preparation Mock Tests</h3>
+                    <p class="text-gray-700">Access full-length, timed mock tests for UPSC, SSC, and other government recruitment exams.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 mt-2 inline-block font-medium flex items-center">
+                        Start Test <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOG PAGE CONTENT (New) -->
+        <section id="blog-page" class="page-content max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold text-purple-600 mb-6 border-b pb-4">Career Success Blog</h1>
+            <p class="text-lg text-gray-600 mb-8">Latest articles, interview tips, and industry trends to keep you ahead.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Blog Post 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <img src="https://placehold.co/400x200/F9A8D4/ffffff?text=Interview+Tips" alt="Interview Tips" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Top 5 Interview Mistakes to Avoid in 2025</h3>
+                        <p class="text-gray-600 text-sm">Learn how to nail your next interview by sidestepping common pitfalls and preparation errors.</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 mt-3 inline-block font-medium text-sm">Read Article &rarr;</a>
+                    </div>
+                </div>
+                <!-- Blog Post 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <img src="https://placehold.co/400x200/93C5FD/ffffff?text=Tech+Trends" alt="Tech Trends" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">The Rise of AI: Jobs That Will Survive and Thrive</h3>
+                        <p class="text-gray-600 text-sm">An analysis of how Artificial Intelligence is reshaping the IT and Non-IT job market.</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 mt-3 inline-block font-medium text-sm">Read Article &rarr;</a>
+                    </div>
+                </div>
+                <!-- Blog Post 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <img src="https://placehold.co/400x200/FECACA/ffffff?text=Govt+Exam" alt="Govt Exam" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">How to Prepare for UPSC in 6 Months</h3>
+                        <p class="text-gray-600 text-sm">A structured 6-month study plan for serious aspirants targeting top government exams.</p>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 mt-3 inline-block font-medium text-sm">Read Article &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT PAGE CONTENT -->
+        <section id="about-page" class="page-content max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-6 border-b pb-4">About Help Job</h1>
+            <div class="bg-white p-8 rounded-xl shadow-lg space-y-6">
+                <p class="text-lg text-gray-700">
+                    **Help Job** was founded with a single mission: to simplify the job search process across all sectors in India. We understand the challenges of sifting through countless websites for IT, Non-IT, Government, and Private sector roles, which is why we consolidated everything into one user-friendly platform.
+                </p>
+                <p class="text-lg text-gray-700">
+                    Our commitment is to transparency, providing clear job descriptions and direct links to application portals. We also dedicate ourselves to career growth by offering curated **Free Certifications** to upskill our users.
+                </p>
+                <p class="text-lg text-gray-700">
+                    Join our community and let us help you take the next big step in your professional journey.
+                </p>
+            </div>
+        </section>
+
+        <!-- CONTACT FORM PAGE CONTENT -->
+        <section id="contact-page" class="page-content max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-6 border-b pb-4">Contact Our Team</h1>
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-lg mx-auto">
+                <form class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message or Query</label>
+                        <textarea id="message" name="message" rows="4" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition duration-200 shadow-md">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- MESSAGE MODAL (Instead of alert()) -->
+        <div id="message-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-[999]">
+            <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full transform transition-all scale-100">
+                <h3 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4">Success!</h3>
+                <p id="modal-body" class="text-gray-600 mb-6">Your action was completed.</p>
+                <button onclick="closeModal()" class="w-full bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition duration-150">
+                    Close
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer (Advanced and Latest Output) -->
+    <footer class="bg-gray-900 text-white mt-16 shadow-2xl border-t border-blue-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            
+            <!-- Top Section: Logo and Newsletter/CTA -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 border-b border-gray-800 pb-10 mb-8">
+                
+                <!-- 1. Logo and Mission -->
+                <div class="col-span-2">
+                    <h4 class="text-3xl font-extrabold mb-3 text-blue-400">Help Job</h4>
+                    <p class="text-gray-400 text-base max-w-sm">
+                        Simplifying your career journey with real-time job notifications, free certifications, and expert career guidance.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition duration-200" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition duration-200" aria-label="Twitter"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition duration-200" aria-label="YouTube"><i data-lucide="youtube" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition duration-200" aria-label="Instagram"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+
+                <!-- 2. Newsletter Subscription (Advanced/Modern Feature) -->
+                <div class="lg:col-span-3">
+                    <h4 class="text-xl font-semibold mb-3 text-white">Join Our Career Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Get the latest job alerts and career tips delivered straight to your inbox every week.</p>
+                    <form onsubmit="showModal('Subscription Successful', 'You have been subscribed to our weekly newsletter!'); this.reset(); return false;" class="flex flex-col sm:flex-row gap-3">
+                        <input type="email" placeholder="Enter your email address" required
+                               class="flex-grow p-3 rounded-lg border border-gray-700 bg-gray-800 text-white focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                        <button type="submit"
+                                class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-200 shadow-lg whitespace-nowrap">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Link Categories (4 Columns) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                
+                <!-- Column 1: Job Notifications -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-gray-200">Job Notifications</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" onclick="navigate('jobs', 'IT')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="code" class="w-4 h-4 mr-2"></i> IT Jobs</a></li>
+                        <li><a href="#" onclick="navigate('jobs', 'Non-IT')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="briefcase" class="w-4 h-4 mr-2"></i> Non-IT Jobs</a></li>
+                        <li><a href="#" onclick="navigate('jobs', 'Govt')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="landmark" class="w-4 h-4 mr-2"></i> Govt Exams</a></li>
+                        <li><a href="#" onclick="navigate('jobs', 'Internships')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="graduation-cap" class="w-4 h-4 mr-2"></i> Internships</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2: Career Resources -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-gray-200">Career Resources</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" onclick="navigate('certifications')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="certificate" class="w-4 h-4 mr-2"></i> Free Certifications</a></li>
+                        <li><a href="#" onclick="navigate('blog')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="pen-tool" class="w-4 h-4 mr-2"></i> Expert Blog</a></li>
+                        <li><a href="#" onclick="showModal('Information', 'Resume Builder feature coming soon!')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Resume Builder</a></li>
+                        <li><a href="#" onclick="showModal('Information', 'Skill Assessment feature coming soon!')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="clipboard-list" class="w-4 h-4 mr-2"></i> Skill Assessment</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Company & Community -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-gray-200">Company & Community</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" onclick="navigate('about')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="users" class="w-4 h-4 mr-2"></i> About Us</a></li>
+                        <li><a href="#" onclick="showModal('Information', 'Career Coaching coming soon!')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="message-square" class="w-4 h-4 mr-2"></i> Career Coaching</a></li>
+                        <li><a href="#" onclick="showModal('Information', 'Join our Discord/Telegram!')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="messages-square" class="w-4 h-4 mr-2"></i> Community Forum</a></li>
+                        <li><a href="#" onclick="showModal('Information', 'Partnership information coming soon!')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="handshake" class="w-4 h-4 mr-2"></i> Partnerships</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4: Support & Legal -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-gray-200">Support & Legal</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" onclick="navigate('contact')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> Contact Support</a></li>
+                        <li><a href="#" onclick="showModal('Information', 'FAQ section coming soon.')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> FAQ</a></li>
+                        <li><a href="#" onclick="showModal('Information', 'Privacy Policy is not yet implemented.')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="shield" class="w-4 h-4 mr-2"></i> Privacy Policy</a></li>
+                        <li><a href="#" onclick="showModal('Information', 'Terms of Service is not yet implemented.')" class="text-gray-400 hover:text-blue-400 transition duration-150 flex items-center"><i data-lucide="gavel" class="w-4 h-4 mr-2"></i> Terms of Service</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Copyright Bar -->
+            <div class="mt-10 pt-6 border-t border-gray-800 text-center text-gray-500 text-sm">
+                &copy; 2025 Help Job. All Rights Reserved. | Made with dedication for job seekers.
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Data structure for sample jobs
+        const jobData = [
+            { id: 1, title: "Senior Backend Developer", type: "IT", sector: "Private", location: "Remote", description: "Design and implement highly scalable services using Node.js and microservices architecture.", logoText: "A", salary: "₹18-25 LPA" },
+            { id: 2, title: "HR Recruiter - Non-Tech", type: "Non-IT", sector: "Private", location: "Hyderabad", description: "Manage full-cycle recruiting for non-technical departments and employee engagement.", logoText: "B", salary: "₹5-8 LPA" },
+            { id: 3, title: "Data Entry Operator", type: "Govt", sector: "Govt", location: "New Delhi", description: "Government post requiring proficiency in M.S. Office and fast typing skills.", logoText: "G", salary: "₹3.5-5 LPA" },
+            { id: 4, title: "Digital Marketing Internship", type: "IT", sector: "Internships", location: "Bangalore", description: "6-month paid internship focusing on SEO, SEM, and social media campaigns.", logoText: "C", salary: "₹15k/month" },
+            { id: 5, title: "Civil Engineer", type: "Non-IT", sector: "Private", location: "Chennai", description: "Oversee and manage construction projects from planning to completion.", logoText: "D", salary: "₹8-12 LPA" },
+            { id: 6, title: "Software Tester Fresher", type: "IT", sector: "Private", location: "Pune", description: "Entry-level role for manual and automated software testing. Training provided.", logoText: "E", salary: "₹4-6 LPA" },
+            { id: 7, title: "UPSC Prelims Coaching", type: "Govt", sector: "Govt", location: "Pan-India", description: "Notification for free government coaching classes for civil services exams.", logoText: "U", salary: "N/A" },
+            { id: 8, title: "Finance Analyst Internship", type: "Non-IT", sector: "Internships", location: "Mumbai", description: "Assist in financial modeling, budgeting, and performance analysis.", logoText: "F", salary: "₹20k/month" }
+        ];
+
+        let currentView = 'home';
+        
+        // --- Core Navigation Logic ---
+        function navigate(pageId, filterType = null) {
+            // Hide all page sections
+            document.querySelectorAll('.page-content').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show the requested page
+            const targetSection = document.getElementById(pageId + '-page');
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                currentView = pageId;
+
+                // Specific logic for the Jobs page
+                if (pageId === 'jobs') {
+                    renderJobCards(filterType);
+                }
+            }
+
+            // Close mobile menu after navigation
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Re-create icons for newly visible content (especially in the footer and main content)
+            lucide.createIcons();
+        }
+
+        // --- Dropdown/Menu Toggle Logic ---
+
+        // Function to toggle a dropdown menu (used for desktop 'Job Notifications' and mobile)
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            if (dropdown) {
+                // For all mobile dropdowns and the main desktop dropdown trigger
+                if (dropdownId.startsWith('mobile') || dropdownId === 'jobs-dropdown') {
+                    dropdown.classList.toggle('hidden');
+                } else {
+                    // This block is primarily for the desktop main dropdown's animation, 
+                    // though for nested dropdowns, the CSS hover utilities handle visibility.
+                    const isHidden = dropdown.classList.contains('hidden');
+                    if (isHidden) {
+                        dropdown.classList.remove('hidden', 'scale-95', 'opacity-0');
+                        dropdown.classList.add('scale-100', 'opacity-100');
+                    } else {
+                        dropdown.classList.add('scale-95', 'opacity-0');
+                        // Wait for transition before hiding completely
+                        setTimeout(() => {
+                            dropdown.classList.add('hidden');
+                        }, 300);
+                    }
+                }
+            }
+        }
+
+        // Function to toggle the main mobile menu and icon (Hamburger <-> X)
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            // Toggle menu visibility
+            mobileMenu.classList.toggle('hidden');
+
+            // Toggle icons (show menu when hidden, show X when visible)
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // Event listener for the mobile menu button
+        document.getElementById('mobile-menu-button').addEventListener('click', toggleMobileMenu);
+
+        // --- Job Card Rendering Logic ---
+
+        // Function to generate the HTML for a single job card
+        function createJobCard(job) {
+            const logoBg = job.sector === 'Govt' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700';
+
+            return `
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.01] transition duration-300 border border-gray-100">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <!-- Circular Company Logo -->
+                            <div class="logo-circle ${logoBg}">
+                                ${job.logoText}
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">${job.title}</h3>
+                                <p class="text-sm font-medium text-blue-600">${job.type} Job | ${job.sector}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-4 text-sm">${job.description}</p>
+                    
+                    <div class="flex flex-wrap items-center justify-between text-sm pt-3 border-t border-gray-100">
+                        <div class="flex items-center space-x-4">
+                            <span class="flex items-center text-gray-500">
+                                <i data-lucide="map-pin" class="w-4 h-4 mr-1"></i>
+                                ${job.location}
+                            </span>
+                            <span class="flex items-center text-gray-500 font-semibold">
+                                <i data-lucide="wallet" class="w-4 h-4 mr-1"></i>
+                                ${job.salary}
+                            </span>
+                        </div>
+                        <button onclick="showModal('Application Sent', 'You successfully applied for the ${job.title} role. Good luck!')" 
+                                class="mt-3 sm:mt-0 bg-green-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-600 transition duration-150 shadow-md">
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to render job cards based on category filter
+        function renderJobCards(filterType) {
+            const isHomePage = currentView === 'home';
+            const containerId = isHomePage ? 'job-cards-container' : 'full-job-cards-container';
+            const container = document.getElementById(containerId);
+            const jobsTitle = document.getElementById('jobs-title');
+
+            if (!container) return;
+
+            // Determine the filter criteria
+            let filteredJobs = jobData;
+            let titleText = "All Job Opportunities";
+
+            if (filterType) {
+                if (filterType === 'IT' || filterType === 'Non-IT') {
+                    filteredJobs = jobData.filter(job => job.type === filterType);
+                    titleText = `${filterType} Jobs (Private Sector)`;
+                } else if (filterType === 'Private') {
+                    // Shows all private jobs (IT and Non-IT)
+                    filteredJobs = jobData.filter(job => job.sector === 'Private');
+                    titleText = "All Private Sector Jobs";
+                } else if (filterType === 'Internships') {
+                    filteredJobs = jobData.filter(job => job.sector === 'Internships');
+                    titleText = "Internship Opportunities";
+                } else if (filterType === 'Govt') {
+                    filteredJobs = jobData.filter(job => job.sector === 'Govt');
+                    titleText = "Government Jobs & Notifications";
+                }
+            } else if (isHomePage) {
+                // For the home page, show a sample of 3 jobs
+                filteredJobs = jobData.slice(0, 3);
+            }
+
+            // Update Jobs page title and description
+            if (jobsTitle) {
+                jobsTitle.textContent = titleText;
+            }
+            const jobsDescription = document.querySelector('#jobs-page p');
+            if (jobsDescription) {
+                jobsDescription.innerHTML = `Showing jobs filtered by **${filterType || 'All Categories'}**. Use the navigation menu to select a specific category.`;
+            }
+
+            // Generate HTML for all cards
+            const cardHtml = filteredJobs.map(job => createJobCard(job)).join('');
+            container.innerHTML = cardHtml;
+
+            // Replace Lucide icons after rendering
+            lucide.createIcons();
+        }
+
+        // --- Modal (Custom Alert) Logic ---
+        function showModal(title, message) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-body').textContent = message;
+            document.getElementById('message-modal').classList.remove('hidden');
+            document.getElementById('message-modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('message-modal').classList.add('hidden');
+            document.getElementById('message-modal').classList.remove('flex');
+        }
+
+        // --- Initialization on Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons for the static elements (like Navbar icons)
+            lucide.createIcons();
+            
+            // Set the initial view to 'home' and render the featured job cards
+            navigate('home');
+            renderJobCards(null);
+            
+            // Attach a simple handler to the Contact Form submission (to prevent actual submission)
+            const contactForm = document.querySelector('#contact-page form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    showModal('Thank You!', 'Your message has been received. We will get back to you shortly!');
+                    contactForm.reset();
+                });
+            }
+            
+            // Fix for mobile menu starting as block in some browsers
+            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Re-create icons for the footer after DOM is fully loaded and icons are available
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
