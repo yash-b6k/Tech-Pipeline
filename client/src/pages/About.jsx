@@ -2,7 +2,7 @@ import React from "react";
 import Lottie from "lottie-react";
 
 // ✅ Icons
-import handshake from "../assets/handshake2.png";
+import handshake from "../assets/handShake2.png";
 import innovation from "../assets/innovation.png";
 import transparency from "../assets/transparency.png";
 
